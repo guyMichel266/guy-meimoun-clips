@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎬 Guy Meimoun Productions — Clips</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            padding: 20px;
+        }
+
+        /* --- EN-TÊTE --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #303030;
+            margin-bottom: 30px;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 50px; width: auto; border-radius: 50%; }
+        .logo span {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #f7971e, #ffd200);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .menu { display: flex; gap: 20px; align-items: center; }
+        .menu a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 15px;
+            padding: 8px 18px;
+            border: 1px solid #444;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .menu a:hover {
+            background: #f7971e;
+            color: #0f0f0f;
+            border-color: #f7971e;
+            box-shadow: 0 0 20px rgba(247,151,30,0.3);
+            transform: scale(1.05);
+        }
+        .menu a.cta { background: #f7971e; color: #0f0f0f; border-color: #f7971e; }
+        .menu a.cta:hover { background: #e08a1a; box-shadow: 0 0 30px rgba(247,151,30,0.5); }
+
+        /* --- GALERIE --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+        }
+        .card:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
+        .card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+        .card .info { padding: 12px 14px; }
+        .card .title {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .card .views { font-size: 13px; color: #aaa; margin-top: 6px; }
+        .card .views span { background: #2a2a2a; padding: 2px 10px; border-radius: 12px; }
+
+        /* --- CONTACT --- */
+        .contact {
+            margin-top: 50px;
+            padding: 30px 20px;
+            border-top: 1px solid #303030;
+            text-align: center;
+        }
+        .contact p { font-size: 16px; color: #aaa; margin-bottom: 20px; }
+        .contact-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .contact-buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .contact-buttons a.youtube { background: #ff0033; color: #fff; border-color: #ff0033; }
+        .contact-buttons a.youtube:hover { background: transparent; color: #ff0033; box-shadow: 0 0 30px rgba(255,0,51,0.3); }
+        .contact-buttons a.whatsapp { background: #25D366; color: #fff; border-color: #25D366; }
+        .contact-buttons a.whatsapp:hover { background: transparent; color: #25D366; box-shadow: 0 0 30px rgba(37,211,102,0.3); }
+        .contact-buttons a.subscribe { background: #fff; color: #0f0f0f; border-color: #fff; }
+        .contact-buttons a.subscribe:hover { background: transparent; color: #fff; box-shadow: 0 0 30px rgba(255,255,255,0.2); }
+
+        .footer { margin-top: 20px; font-size: 13px; color: #555; text-align: center; }
+        .loading { text-align: center; padding: 50px; font-size: 18px; color: #aaa; }
+        .error { color: #ff6b6b; text-align: center; padding: 50px; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <img src="https://ui-avatars.com/api/?name=Guy&background=f7971e&color=fff&size=50" alt="Logo" />
+            <span>GUY MEIMOUN PRODUCTIONS</span>
+        </div>
+        <nav class="menu">
+            <a href="#">Accueil</a>
+            <a href="#">Clips</a>
+            <a href="https://www.youtube.com/@carolinewebtv4124?sub_confirmation=1" target="_blank" class="cta">🔔 S'abonner</a>
+        </nav>
+    </header>
+
+    <h1 style="font-size:24px; font-weight:400; margin-bottom:10px;">🎬 Sélection des clips</h1>
+
+    <div id="gallery" class="grid">
+        <div class="loading">⏳ Chargement des vidéos...</div>
+    </div>
+
+    <section class="contact">
+        <p>🎵 Rejoins la communauté ! Abonne-toi, suis-moi et partage tes retours.</p>
+        <div class="contact-buttons">
+            <a href="https://www.youtube.com/@carolinewebtv4124" target="_blank" class="youtube">▶️ YouTube</a>
+            <a href="https://chat.whatsapp.com/ton-lien-invitation" target="_blank" class="whatsapp">💬 WhatsApp</a>
+            <a href="https://www.youtube.com/@carolinewebtv4124?sub_confirmation=1" target="_blank" class="subscribe">🔔 S'abonner</a>
+        </div>
+        <div class="footer" id="footer">Généré depuis YouTube · 0 vidéos</div>
+    </section>
+
+    <script>
+        // ✅ AUCUNE CLÉ API ICI — tout passe par le proxy Netlify
+        // Le proxy est dans /netlify/functions/youtube.js
+        // Les identifiants sont dans les variables d'environnement Netlify
+
+        const gallery = document.getElementById('gallery');
+        const footer  = document.getElementById('footer');
+
+        async function fetchVideos() {
+            try {
+                // Appel au proxy Netlify (et non à YouTube directement)
+                const res = await fetch('/.netlify/functions/youtube');
+
+                if (!res.ok) {
+                    throw new Error(`Erreur HTTP ${res.status}`);
+                }
+
+                const data = await res.json();
+
+                if (data.error) {
+                    gallery.innerHTML = `<p class="error">❌ ${data.error}</p>`;
+                    return;
+                }
+
+                if (!data.videos || data.videos.length === 0) {
+                    gallery.innerHTML = '<p class="error">❌ Aucune vidéo trouvée.</p>';
+                    return;
+                }
+
+                let html = '';
+                data.videos.forEach(video => {
+                    html += `
+                        <a href="https://www.youtube.com/watch?v=${video.id}" target="_blank" class="card">
+                            <img src="${video.thumbnail}" alt="${video.title.replace(/"/g, '&quot;')}" loading="lazy" />
+                            <div class="info">
+                                <div class="title">${video.title}</div>
+                                <div class="views"><span>👁️ ${video.views.toLocaleString('fr-FR')} vues</span></div>
+                            </div>
+                        </a>
+                    `;
+                });
+
+                gallery.innerHTML = html;
+                footer.textContent = `Généré depuis YouTube · ${data.total} vidéos · Mis à jour le ${new Date().toLocaleDateString('fr-FR')}`;
+
+            } catch (err) {
+                console.error(err);
+                gallery.innerHTML = '<p class="error">❌ Erreur de chargement. Réessaie dans quelques secondes.</p>';
+            }
+        }
+
+        fetchVideos();
+    </script>
+
+</body>
+</html>
